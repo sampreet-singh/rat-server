@@ -10,11 +10,17 @@
     "type": "git",
     "url": "git+https://github.com/sampreet-singh/rat-server.git"
   },
-  "license": "ISC",
   "author": "Sampreet Singh",
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "start": "npm run build && node dist/index.js"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.5",
+    "typescript": "^5.9.3"
   }
 }
