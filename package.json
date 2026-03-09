@@ -24,6 +24,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "discord.js": "^14.25.1"
+    "discord.js": "^14.25.1",
+    "socket.io": "^4.8.3"
   }
 }
