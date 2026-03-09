@@ -3,5 +3,8 @@
     "Discord-bot-token": "",
     "Discord-category-id": "",
     "Discord-channel-name-format": "Connection-%connection_id%"
+  },
+  "Socket-io": {
+    "Port": 3000
   }
 }

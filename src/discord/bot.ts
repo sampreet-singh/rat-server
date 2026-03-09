@@ -9,8 +9,10 @@ const client = new Client({
   ],
 });
 
-client.on(Events.ClientReady, (readyClient) => {
-  console.log(`Logged in as ${readyClient.user.tag}!`);
-});
+export function startDiscordBot() {
+  client.on(Events.ClientReady, (readyClient) => {
+    console.log(`Logged in as ${readyClient.user.tag}!`);
+  });
 
-client.login(config["Discord-options"]["Discord-bot-token"]);
+  client.login(config["Discord-options"]["Discord-bot-token"]);
+}
