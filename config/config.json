@@ -1,10 +1,12 @@
 {
   "discord": {
-    "botToken": "",
+    "botToken": "$DISCORD_TOKEN",
     "categoryId": "",
-    "channelNameFormat": "connection-%connection_id%"
+    "debugChannelId": "1480643870034497618",
+    "debug": true,
+    "connectionChannelName": "connection-%connection_id%"
   },
-  "socket": {
+  "server": {
     "port": 3000
   }
 }

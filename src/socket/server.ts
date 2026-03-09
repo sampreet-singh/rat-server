@@ -1,4 +1,5 @@
 import { Server } from "socket.io";
+import { bus } from "@/src/events/bus.js";
 import { Server as HttpServer } from "http";
 
 export function startSocketServer(httpServer: HttpServer) {
@@ -7,10 +8,16 @@ export function startSocketServer(httpServer: HttpServer) {
   });
 
   io.on("connection", (socket) => {
-    console.log("Client connected:", socket.id);
+    const { id } = socket;
+
+    console.log("client connected:", id);
+    bus.emit("clientConnected", { id });
 
     socket.on("disconnect", () => {
-      console.log("Client disconnected:", socket.id);
+      console.log("client disconnected:", id);
+      bus.emit("clientDisconnected", { id });
     });
   });
+
+  return io;
 }
