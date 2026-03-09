@@ -5,6 +5,12 @@
     "rootDir": "./src",
     "outDir": "./dist",
 
+    // TypeScript path aliases
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["*"]
+    },
+
     // Resolve JSON imports
     "resolveJsonModule": true,
 

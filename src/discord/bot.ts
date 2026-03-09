@@ -1,5 +1,5 @@
 import { Client, Events, GatewayIntentBits } from "discord.js";
-import config from "../../config/config.json" with { type: "json" };
+import config from "@/config/config.json" with { type: "json" };
 
 const client = new Client({
   intents: [
@@ -14,5 +14,5 @@ export function startDiscordBot() {
     console.log(`Logged in as ${readyClient.user.tag}!`);
   });
 
-  client.login(config["Discord-options"]["Discord-bot-token"]);
+  client.login(config.discord.botToken);
 }
