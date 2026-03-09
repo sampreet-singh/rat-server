@@ -1,0 +1,7 @@
+{
+  "Discord-options": {
+    "Discord-bot-token": "",
+    "Discord-category-id": "",
+    "Discord-channel-name-format": "Connection-%connection_id%"
+  }
+}
