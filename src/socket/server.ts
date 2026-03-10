@@ -1,23 +1,20 @@
 import { Server } from "socket.io";
-import { bus } from "@/src/events/bus.js";
-import { Server as HttpServer } from "http";
+import { bus } from "@src/events/bus.js";
 
-export function startSocketServer(httpServer: HttpServer) {
-  const io = new Server(httpServer, {
-    cors: { origin: "*" },
+const io = new Server({
+  cors: { origin: "*" },
+});
+
+io.on("connection", (socket) => {
+  const { id } = socket;
+
+  console.log("client connected:", id);
+  bus.emit("clientConnected", { id });
+
+  socket.on("disconnect", () => {
+    console.log("client disconnected:", id);
+    bus.emit("clientDisconnected", { id });
   });
+});
 
-  io.on("connection", (socket) => {
-    const { id } = socket;
-
-    console.log("client connected:", id);
-    bus.emit("clientConnected", { id });
-
-    socket.on("disconnect", () => {
-      console.log("client disconnected:", id);
-      bus.emit("clientDisconnected", { id });
-    });
-  });
-
-  return io;
-}
+export { io };

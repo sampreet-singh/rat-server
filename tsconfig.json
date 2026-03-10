@@ -8,7 +8,8 @@
     // TypeScript path aliases
     "baseUrl": ".",
     "paths": {
-      "@/*": ["*"]
+      "@src/*": ["src/*"],
+      "@config/*": ["config/*"]
     },
 
     // Resolve JSON imports
