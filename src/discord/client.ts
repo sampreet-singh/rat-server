@@ -1,10 +1,15 @@
 import { bus } from "@src/events/bus.js";
-import { REST, Routes } from "discord.js";
+import { ping } from "./commands/ping.js";
+import type { Command } from "./command.js";
 import config from "@config/config.json" with { type: "json" };
 import { resolveEnvironmentVariable as resolve } from "@src/lib/utils.js";
 import { Client, Events, GatewayIntentBits, TextChannel } from "discord.js";
-import type { Command } from "./command.js";
-import { ping } from "./commands/ping.js";
+import {
+  MessageFlags,
+  REST,
+  Routes,
+  type InteractionReplyOptions,
+} from "discord.js";
 
 const client = new Client({
   intents: [
@@ -44,6 +49,33 @@ client.once(Events.ClientReady, async (readyClient) => {
     debugChannel = channel as TextChannel;
   } else {
     console.warn("Debug channel not found or not text-based");
+  }
+});
+
+client.on(Events.InteractionCreate, async (interaction) => {
+  if (!interaction.isChatInputCommand()) return;
+
+  const command = commands.find(
+    (cmd) => cmd.data.name === interaction.commandName,
+  );
+
+  if (!command) return;
+
+  try {
+    await command.execute(interaction);
+  } catch (error) {
+    console.error(error);
+
+    const reply: InteractionReplyOptions = {
+      content: "Error executing command",
+      flags: MessageFlags.Ephemeral,
+    };
+
+    if (interaction.replied || interaction.deferred) {
+      await interaction.followUp(reply);
+    } else {
+      await interaction.reply(reply);
+    }
   }
 });
 

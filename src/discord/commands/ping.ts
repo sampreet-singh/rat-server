@@ -1,5 +1,9 @@
 import type { Command } from "@src/discord/command.js";
-import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
+import {
+  ChatInputCommandInteraction,
+  MessageFlags,
+  SlashCommandBuilder,
+} from "discord.js";
 
 export const ping: Command = {
   data: new SlashCommandBuilder()
@@ -9,6 +13,9 @@ export const ping: Command = {
     ),
 
   execute: async function (interaction: ChatInputCommandInteraction) {
-    interaction.reply(`Pong! ${Math.round(interaction.client.ws.ping)}`);
+    interaction.reply({
+      content: `Pong! ${Math.round(interaction.client.ws.ping)}`,
+      flags: MessageFlags.Ephemeral,
+    });
   },
 };
