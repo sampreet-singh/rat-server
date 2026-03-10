@@ -2,8 +2,8 @@
   "discord": {
     "botToken": "$DISCORD_TOKEN",
     "categoryId": "",
-    "debugChannelId": "1480643870034497618",
-    "debug": true,
+    "debugChannelId": "",
+    "debug": false,
     "connectionChannelName": "connection-%connection_id%"
   },
   "server": {
