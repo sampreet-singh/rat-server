@@ -7,7 +7,7 @@ export function resolveEnvironmentVariable(value: string): string {
   const envValue = process.env[envName];
 
   if (!envValue) {
-    throw new Error(`Environment variable '${envName}' was not found`);
+    throw new Error(`Environment variable '${envName}' not found`);
   }
 
   return envValue;

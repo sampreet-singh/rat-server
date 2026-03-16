@@ -7,19 +7,18 @@ import http from "http";
 
 async function start() {
   try {
+    // start the discord bot
     await client.login(resolve(config.discord.botToken));
 
+    // start the socket server
     const httpServer = http.createServer();
-
     io.attach(httpServer);
 
     httpServer.listen(config.server.port, () => {
-      logger.info(`Socket server started on port ${config.server.port}`);
+      logger.info(`Socket server running on port ${config.server.port}`);
     });
   } catch (error) {
-    logger.error(
-      `An error occured while starting the Discord client or socket server: ${error}`,
-    );
+    logger.error(`An error occured while startup: ${error}`);
     process.exit(1);
   }
 }

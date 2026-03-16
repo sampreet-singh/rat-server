@@ -20,8 +20,6 @@ export const ping: Command = {
       flags: MessageFlags.Ephemeral,
     });
 
-    logger.info(
-      `Ping! command ran in channel with ID '${interaction.channelId}'`,
-    );
+    logger.info(`Ping! command ran in channel ID '${interaction.channelId}'`);
   },
 };

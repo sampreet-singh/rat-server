@@ -27,7 +27,7 @@ client.once(Events.ClientReady, async (readyClient) => {
     body: commandData,
   });
 
-  logger.info(`${commands.length} slash commnd(s) registered to Discord`);
+  logger.info(`${commands.length} slash command(s) registered to Discord`);
 });
 
 client.on(Events.InteractionCreate, async (interaction) => {
@@ -44,7 +44,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
     await command.execute(interaction);
   } catch (error) {
     logger.error(
-      `${interaction.commandName} command failed in channel with ID '${interaction.channelId}'`,
+      `${interaction.commandName} command failed in channel ID '${interaction.channelId}'`,
     );
   }
 });

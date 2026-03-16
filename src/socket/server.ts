@@ -1,3 +1,4 @@
+import { disconnect, identity } from "@src/socket/clients.js";
 import { logger } from "@src/lib/logger.js";
 import { Server } from "socket.io";
 
@@ -6,13 +7,11 @@ const io = new Server({
 });
 
 io.on("connection", (socket) => {
-  const { id } = socket;
+  logger.info(`Client connected: IP ${socket.handshake.address}`);
 
-  logger.info(`Socket client connected with ID '${id}'`);
+  socket.on("identify", ({ clientId }) => identity(clientId, socket));
 
-  socket.on("disconnect", () => {
-    logger.info(`Socket client disconnected with ID '${id}'`);
-  });
+  socket.on("disconnect", () => disconnect(socket));
 });
 
 export { io };
