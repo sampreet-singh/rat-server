@@ -1,8 +1,9 @@
-import http from "http";
-import { io } from "@src/socket/server.js";
-import { client } from "@src/discord/client.js";
-import config from "@config/config.json" with { type: "json" };
 import { resolveEnvironmentVariable as resolve } from "@src/lib/utils.js";
+import config from "@config/config.json" with { type: "json" };
+import { client } from "@src/discord/client.js";
+import { io } from "@src/socket/server.js";
+import { logger } from "./lib/logger.js";
+import http from "http";
 
 async function start() {
   try {
@@ -13,10 +14,12 @@ async function start() {
     io.attach(httpServer);
 
     httpServer.listen(config.server.port, () => {
-      console.log(`Socket.IO server running on port ${config.server.port}`);
+      logger.info(`Socket server started on port ${config.server.port}`);
     });
   } catch (error) {
-    console.error("An error occured during startup:", error);
+    logger.error(
+      `An error occured while starting the Discord client or socket server: ${error}`,
+    );
     process.exit(1);
   }
 }

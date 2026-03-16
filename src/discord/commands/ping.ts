@@ -1,4 +1,5 @@
 import type { Command } from "@src/discord/command.js";
+import { logger } from "@src/lib/logger.js";
 import {
   ChatInputCommandInteraction,
   MessageFlags,
@@ -6,6 +7,7 @@ import {
 } from "discord.js";
 
 export const ping: Command = {
+  // set command metadata for Discord
   data: new SlashCommandBuilder()
     .setName("ping")
     .setDescription(
@@ -17,5 +19,9 @@ export const ping: Command = {
       content: `Pong! ${Math.round(interaction.client.ws.ping)}`,
       flags: MessageFlags.Ephemeral,
     });
+
+    logger.info(
+      `Ping! command ran in channel with ID '${interaction.channelId}'`,
+    );
   },
 };

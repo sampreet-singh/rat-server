@@ -1,9 +1,10 @@
 {
+  "global": {
+    "logging": true
+  },
   "discord": {
     "botToken": "$DISCORD_TOKEN",
     "categoryId": "",
-    "debugChannelId": "",
-    "debug": false,
     "connectionChannelName": "connection-%connection_id%"
   },
   "server": {
