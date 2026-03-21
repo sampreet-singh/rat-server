@@ -1,17 +1,17 @@
 import { t } from "@src/i18n/index.js";
 import "dotenv/config";
 
-export function resolveEnvironmentVariable(value: string): string {
+export function resolve_environment_variable(value: string): string {
   if (!value.startsWith("$")) {
     return value;
   }
 
-  const envName = value.slice(1);
-  const envValue = process.env[envName];
+  const env_name = value.slice(1);
+  const env_value = process.env[env_name];
 
-  if (!envValue) {
-    throw new Error(t("env.missing_variable", { name: envName }));
+  if (!env_value) {
+    throw new Error(t("env.missing_variable", { name: env_name }));
   }
 
-  return envValue;
+  return env_value;
 }

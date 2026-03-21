@@ -5,16 +5,16 @@ const languages = { en };
 
 export type Lang = keyof typeof languages;
 
-let currentLang: Lang = "en";
+let current_lang: Lang = "en";
 
-export function setLanguage(lang: string) {
+export function set_language(lang: string) {
   if (!(lang in languages)) {
     logger.warn(t("i18n.invalid_language", { lang }));
-    currentLang = "en";
+    current_lang = "en";
     return;
   }
 
-  currentLang = lang as Lang;
+  current_lang = lang as Lang;
   logger.info(t("i18n.language_set", { lang }));
 }
 
@@ -24,7 +24,7 @@ export function t(
 ): string {
   const value = key
     .split(".")
-    .reduce<any>((obj, k) => obj?.[k], languages[currentLang]);
+    .reduce<any>((obj, k) => obj?.[k], languages[current_lang]);
 
   if (typeof value !== "string") {
     return key;

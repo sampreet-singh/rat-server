@@ -12,7 +12,7 @@ const io = new Server({
 io.on("connection", (socket) => {
   logger.info(t("socket.connected.ip", { ip: socket.handshake.address }));
 
-  socket.on("identify", ({ clientId }) => identity(clientId, socket));
+  socket.on("identify", ({ client_id }) => identity(client_id, socket));
 
   socket.on("disconnect", () => disconnect(socket));
 });

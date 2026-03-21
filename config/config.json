@@ -4,9 +4,9 @@
     "logging": true
   },
   "discord": {
-    "botToken": "$DISCORD_TOKEN",
-    "categoryId": "",
-    "connectionChannelName": "connection-%connection_id%"
+    "bot_token": "$DISCORD_TOKEN",
+    "category_id": "",
+    "channel_name": "connection-{id}"
   },
   "server": {
     "port": 3000

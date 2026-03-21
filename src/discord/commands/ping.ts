@@ -15,18 +15,18 @@ export const ping: Command = {
     .setDescription(t("discord.commands.ping.description")),
 
   async execute(interaction: ChatInputCommandInteraction) {
-    const pingValue = Math.round(interaction.client.ws.ping);
+    const ping_value = Math.round(interaction.client.ws.ping);
 
     await interaction.reply({
       content: t("discord.commands.ping.reply", {
-        ping: pingValue,
+        ping: ping_value,
       }),
       flags: MessageFlags.Ephemeral,
     });
 
     logger.info(
       t("discord.commands.ping.log", {
-        channelId: interaction.channelId,
+        channel_id: interaction.channelId,
       }),
     );
   },

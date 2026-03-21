@@ -3,7 +3,7 @@ import config from "@config/config.json" with { type: "json" };
 const enabled = config.global.logging;
 
 // add the prefix to the message before running whatever function
-function createLogger(fn: (...args: any[]) => void, prefix: string) {
+function create_logger(fn: (...args: any[]) => void, prefix: string) {
   if (!enabled) {
     return () => {};
   }
@@ -15,7 +15,7 @@ function createLogger(fn: (...args: any[]) => void, prefix: string) {
 
 // export an object containing all logging functions
 export const logger = {
-  error: createLogger(console.error, "[ERROR]"),
-  warn: createLogger(console.warn, "[WARN]"),
-  info: createLogger(console.log, "[INFO]"),
+  error: create_logger(console.error, "[ERROR]"),
+  warn: create_logger(console.warn, "[WARN]"),
+  info: create_logger(console.log, "[INFO]"),
 };

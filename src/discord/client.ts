@@ -1,5 +1,5 @@
 import { Client, Events, GatewayIntentBits, REST, Routes } from "discord.js";
-import { resolveEnvironmentVariable as resolve } from "@src/lib/utils.js";
+import { resolve_environment_variable as resolve } from "@src/lib/utils.js";
 import config from "@config/config.json" with { type: "json" };
 import type { Command } from "./command.js";
 import { ping } from "./commands/ping.js";
@@ -15,17 +15,17 @@ const client = new Client({
 });
 
 const commands: Command[] = [ping];
-const commandData = commands.map((cmd) => cmd.data.toJSON());
+const command_data = commands.map((cmd) => cmd.data.toJSON());
 
 const rest = new REST({ version: "10" }).setToken(
-  resolve(config.discord.botToken),
+  resolve(config.discord.bot_token),
 );
 
-client.once(Events.ClientReady, async (readyClient) => {
+client.once(Events.ClientReady, async (ready_client) => {
   logger.info(t("discord.ready", { tag: client.user?.tag }));
 
-  await rest.put(Routes.applicationCommands(readyClient.application.id), {
-    body: commandData,
+  await rest.put(Routes.applicationCommands(ready_client.application.id), {
+    body: command_data,
   });
 
   logger.info(
@@ -48,9 +48,9 @@ client.on(Events.InteractionCreate, async (interaction) => {
     await command.execute(interaction);
   } catch {
     logger.error(
-      t("discord.commands.failed", {
+      t("discord.errors.command_failed", {
         command: interaction.commandName,
-        channelId: interaction.channelId,
+        channel_id: interaction.channelId,
       }),
     );
   }

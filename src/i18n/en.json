@@ -18,14 +18,18 @@
     "ready": "Discord client logged in as {tag}",
 
     "commands": {
-      "registered": "{count} slash command(s) registered to Discord",
-      "failed": "{command} command failed in channel ID {channelId}",
+      "registered": "Registered {count} slash command(s) to Discord",
 
       "ping": {
         "description": "Replies with 'Pong!' and the bot's latency in milliseconds.",
         "reply": "Pong! {ping}ms",
-        "log": "Ping command ran in channel ID {channelId}"
+        "log": "Ping command ran in channel ID {channel_id}"
       }
+    },
+
+    "errors": {
+      "command_failed": "Command {command} failed in channel ID {channel_id}",
+      "invalid_category_id": "Category not found with ID {id}"
     }
   },
 
@@ -34,11 +38,8 @@
     "invalid_language": "Invalid language '{lang}', falling back to default"
   },
 
-  "env": {
-    "missing_variable": "Environment variable '{name}' not found"
-  },
-
-  "app": {
+  "errors": {
+    "missing_variable": "Environment variable '{name}' not found",
     "startup_error": "An error occurred during startup: {error}"
   }
 }
