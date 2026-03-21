@@ -1,17 +1,11 @@
 {
-  "socket": {
-    "started": "Socket server running on port {port}",
+  "server": {
+    "started": "Socket server running on port {port}"
+  },
 
-    "identified": "Client identified: ID {id}",
-
-    "connected": {
-      "id": "Client reconnected: ID {id}",
-      "ip": "Client connected: IP {ip}"
-    },
-    "disconnected": {
-      "id": "Client disconnected: ID {id}",
-      "ip": "Client disconnected: IP {ip}"
-    }
+  "client": {
+    "connected": "Client connected: ID {id}",
+    "disconnected": "Client disconnected: ID {id}"
   },
 
   "discord": {
@@ -25,21 +19,18 @@
         "reply": "Pong! {ping}ms",
         "log": "Ping command ran in channel ID {channel_id}"
       }
-    },
-
-    "errors": {
-      "command_failed": "Command {command} failed in channel ID {channel_id}",
-      "invalid_category_id": "Category not found with ID {id}"
     }
+  },
+
+  "errors": {
+    "command_failed": "Command {command} failed in channel ID {channel_id}",
+    "invalid_category_id": "Category not found with ID {id}",
+    "missing_variable": "Environment variable {name} not found",
+    "startup_error": "An error occurred during startup: {error}"
   },
 
   "i18n": {
     "language_set": "Language set to {lang}",
-    "invalid_language": "Invalid language '{lang}', falling back to default"
-  },
-
-  "errors": {
-    "missing_variable": "Environment variable '{name}' not found",
-    "startup_error": "An error occurred during startup: {error}"
+    "invalid_language": "Invalid language {lang}, falling back to default"
   }
 }

@@ -9,7 +9,7 @@ function create_logger(fn: (...args: any[]) => void, prefix: string) {
   }
 
   return (...args: any[]) => {
-    fn(`${prefix}`, ...args);
+    fn(`[${new Date().toISOString()}] ${prefix}`, ...args);
   };
 }
 

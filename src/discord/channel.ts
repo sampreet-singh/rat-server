@@ -7,7 +7,9 @@ export async function setup(client_id: string): Promise<string> {
   const category = await client.channels.fetch(config.discord.category_id);
 
   if (!category || category.type !== ChannelType.GuildCategory) {
-    throw new Error(t("discord.errors.invalid_category_id"));
+    throw new Error(
+      t("errors.invalid_category_id", { id: config.discord.category_id }),
+    );
   }
 
   const channel = await (category as CategoryChannel).children.create({

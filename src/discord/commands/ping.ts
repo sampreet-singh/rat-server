@@ -1,4 +1,4 @@
-import type { Command } from "@src/discord/command.js";
+import type { Command } from "@src/discord/commands/command.js";
 import { t } from "@src/i18n/index.js";
 import { logger } from "@src/lib/logger.js";
 

@@ -1,7 +1,8 @@
+import { setup } from "@src/discord/channel.js";
 import { logger } from "@src/lib/logger.js";
 import type { Socket } from "socket.io";
 import { t } from "@src/i18n/index.js";
-import { setup } from "@src/discord/channel.js";
+import { bus } from "@src/lib/bus.js";
 
 export interface Stored {
   id: string;
@@ -38,27 +39,23 @@ export async function identity(client_id: string, socket: Socket) {
     };
 
     clients.set(client_id, client);
-
-    logger.info(t("socket.connected.ip", { ip }));
   } else {
     client.connected = true;
     client.socket_id = socket_id;
     client.last_seen = Date.now();
     client.ip = ip;
-
-    logger.info(t("socket.connected.id", { id: client_id }));
   }
 
   socket.data.client_id = client_id;
+
+  logger.info(t("client.connected", { id: client_id }));
+  bus.emit("client_connected", { client_id });
 }
 
 export function disconnect(socket: Socket) {
   const client_id = socket.data.client_id;
 
-  if (!client_id) {
-    logger.info(t("socket.disconnected.ip", { ip: socket.handshake.address }));
-    return;
-  }
+  if (!client_id) return;
 
   const client = clients.get(client_id);
   if (!client) return;
@@ -66,5 +63,6 @@ export function disconnect(socket: Socket) {
   client.connected = false;
   delete client.socket_id;
 
-  logger.info(t("socket.disconnected.id", { id: client_id }));
+  logger.info(t("client.disconnected", { id: client_id }));
+  bus.emit("client_disconnected", { client_id });
 }

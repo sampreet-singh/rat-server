@@ -10,7 +10,7 @@ export function resolve_environment_variable(value: string): string {
   const env_value = process.env[env_name];
 
   if (!env_value) {
-    throw new Error(t("env.missing_variable", { name: env_name }));
+    throw new Error(t("errors.missing_variable", { name: env_name }));
   }
 
   return env_value;

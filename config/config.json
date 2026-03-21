@@ -5,7 +5,7 @@
   },
   "discord": {
     "bot_token": "$DISCORD_TOKEN",
-    "category_id": "",
+    "category_id": "1480623045453414521",
     "channel_name": "connection-{id}"
   },
   "server": {

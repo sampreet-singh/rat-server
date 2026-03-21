@@ -1,10 +1,11 @@
 import { Client, Events, GatewayIntentBits, REST, Routes } from "discord.js";
 import { resolve_environment_variable as resolve } from "@src/lib/utils.js";
 import config from "@config/config.json" with { type: "json" };
-import type { Command } from "./command.js";
+import type { Command } from "./commands/command.js";
 import { ping } from "./commands/ping.js";
 import { logger } from "@src/lib/logger.js";
 import { t } from "@src/i18n/index.js";
+import "@src/discord/listeners.js";
 
 const client = new Client({
   intents: [
@@ -48,7 +49,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
     await command.execute(interaction);
   } catch {
     logger.error(
-      t("discord.errors.command_failed", {
+      t("errors.command_failed", {
         command: interaction.commandName,
         channel_id: interaction.channelId,
       }),
