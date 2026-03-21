@@ -1,0 +1,47 @@
+{
+  "socket": {
+    "started": "Socket server running on port {port}",
+
+    "connections": {
+      "connected": {
+        "id": "Client reconnected: ID {id}",
+        "ip": "Client connected: IP {ip}"
+      },
+
+      "identified": "Client identified: ID {id}",
+
+      "disconnected": {
+        "id": "Client disconnected: ID {id}",
+        "ip": "Client disconnected: IP {ip}"
+      }
+    }
+  },
+
+  "discord": {
+    "ready": "Discord client logged in as {tag}",
+
+    "commands": {
+      "registered": "{count} slash command(s) registered to Discord",
+      "failed": "{command} command failed in channel ID {channelId}",
+
+      "ping": {
+        "description": "Replies with 'Pong!' and the bot's latency in milliseconds.",
+        "reply": "Pong! {ping}ms",
+        "log": "Ping command ran in channel ID {channelId}"
+      }
+    }
+  },
+
+  "i18n": {
+    "language_set": "Language set to {lang}",
+    "invalid_language": "Invalid language '{lang}', falling back to default"
+  },
+
+  "env": {
+    "missing_variable": "Environment variable '{name}' not found"
+  },
+
+  "app": {
+    "startup_error": "An error occurred during startup: {error}"
+  }
+}

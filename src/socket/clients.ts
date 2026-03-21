@@ -1,5 +1,6 @@
 import { logger } from "@src/lib/logger.js";
 import type { Socket } from "socket.io";
+import { t } from "@src/i18n/index.js";
 
 export interface Stored {
   id: string;
@@ -33,14 +34,14 @@ export function identity(clientId: string, socket: Socket) {
 
     clients.set(clientId, client);
 
-    logger.info(`Client identified: ID ${clientId}`);
+    logger.info(t("socket.connections.connected.ip", { ip: ip }));
   } else {
     client.connected = true;
     client.socketId = socketId;
     client.lastSeen = Date.now();
     client.ip = ip;
 
-    logger.info(`Client reconnected: ID ${clientId}`);
+    logger.info(t("socket.connections.connected.id", { id: clientId }));
   }
 
   socket.data.clientId = clientId;
@@ -50,15 +51,18 @@ export function disconnect(socket: Socket) {
   const clientId = socket.data.clientId;
 
   if (!clientId) {
-    logger.info(`Client disconnected: IP ${socket.handshake.address}`);
+    logger.info(
+      t("socket.connections.disconnected.ip", { ip: socket.handshake.address }),
+    );
     return;
   }
 
   const client = clients.get(clientId);
+
   if (!client) return;
 
   client.connected = false;
   delete client.socketId;
 
-  logger.info(`Client disconnected: ID ${clientId}`);
+  logger.info(t("socket.connections.disconnected.id", { id: clientId }));
 }

@@ -4,7 +4,9 @@ const enabled = config.global.logging;
 
 // add the prefix to the message before running whatever function
 function createLogger(fn: (...args: any[]) => void, prefix: string) {
-  if (!enabled) return () => {};
+  if (!enabled) {
+    return () => {};
+  }
 
   return (...args: any[]) => {
     fn(`${prefix}`, ...args);

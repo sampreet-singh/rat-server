@@ -1,5 +1,7 @@
 import type { Command } from "@src/discord/command.js";
+import { t } from "@src/i18n/index.js";
 import { logger } from "@src/lib/logger.js";
+
 import {
   ChatInputCommandInteraction,
   MessageFlags,
@@ -10,16 +12,22 @@ export const ping: Command = {
   // set command metadata for Discord
   data: new SlashCommandBuilder()
     .setName("ping")
-    .setDescription(
-      "Replies with 'Pong!' and the bot's latency in milliseconds.",
-    ),
+    .setDescription(t("discord.commands.ping.description")),
 
-  execute: async function (interaction: ChatInputCommandInteraction) {
-    interaction.reply({
-      content: `Pong! ${Math.round(interaction.client.ws.ping)}`,
+  async execute(interaction: ChatInputCommandInteraction) {
+    const pingValue = Math.round(interaction.client.ws.ping);
+
+    await interaction.reply({
+      content: t("discord.commands.ping.reply", {
+        ping: pingValue,
+      }),
       flags: MessageFlags.Ephemeral,
     });
 
-    logger.info(`Ping! command ran in channel ID '${interaction.channelId}'`);
+    logger.info(
+      t("discord.commands.ping.log", {
+        channelId: interaction.channelId,
+      }),
+    );
   },
 };

@@ -1,10 +1,10 @@
-import { Client, Events, GatewayIntentBits, TextChannel } from "discord.js";
+import { Client, Events, GatewayIntentBits, REST, Routes } from "discord.js";
 import { resolveEnvironmentVariable as resolve } from "@src/lib/utils.js";
 import config from "@config/config.json" with { type: "json" };
 import type { Command } from "./command.js";
-import { logger } from "@src/lib/logger.js";
 import { ping } from "./commands/ping.js";
-import { REST, Routes } from "discord.js";
+import { logger } from "@src/lib/logger.js";
+import { t } from "@src/i18n/index.js";
 
 const client = new Client({
   intents: [
@@ -14,24 +14,28 @@ const client = new Client({
   ],
 });
 
-const rest = new REST({ version: "10" }).setToken(
-  resolve(config.discord.botToken),
-);
 const commands: Command[] = [ping];
 const commandData = commands.map((cmd) => cmd.data.toJSON());
 
+const rest = new REST({ version: "10" }).setToken(
+  resolve(config.discord.botToken),
+);
+
 client.once(Events.ClientReady, async (readyClient) => {
-  logger.info(`Discord client logged in as ${client.user?.tag}`);
+  logger.info(t("discord.ready", { tag: client.user?.tag }));
 
   await rest.put(Routes.applicationCommands(readyClient.application.id), {
     body: commandData,
   });
 
-  logger.info(`${commands.length} slash command(s) registered to Discord`);
+  logger.info(
+    t("discord.commands.registered", {
+      count: commands.length,
+    }),
+  );
 });
 
 client.on(Events.InteractionCreate, async (interaction) => {
-  // only process slash commands
   if (!interaction.isChatInputCommand()) return;
 
   const command = commands.find(
@@ -42,9 +46,12 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
   try {
     await command.execute(interaction);
-  } catch (error) {
+  } catch {
     logger.error(
-      `${interaction.commandName} command failed in channel ID '${interaction.channelId}'`,
+      t("discord.commands.failed", {
+        command: interaction.commandName,
+        channelId: interaction.channelId,
+      }),
     );
   }
 });
