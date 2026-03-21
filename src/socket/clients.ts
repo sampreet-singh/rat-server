@@ -34,14 +34,14 @@ export function identity(clientId: string, socket: Socket) {
 
     clients.set(clientId, client);
 
-    logger.info(t("socket.connections.connected.ip", { ip: ip }));
+    logger.info(t("socket.connected.ip", { ip: ip }));
   } else {
     client.connected = true;
     client.socketId = socketId;
     client.lastSeen = Date.now();
     client.ip = ip;
 
-    logger.info(t("socket.connections.connected.id", { id: clientId }));
+    logger.info(t("socket.connected.id", { id: clientId }));
   }
 
   socket.data.clientId = clientId;
@@ -51,9 +51,7 @@ export function disconnect(socket: Socket) {
   const clientId = socket.data.clientId;
 
   if (!clientId) {
-    logger.info(
-      t("socket.connections.disconnected.ip", { ip: socket.handshake.address }),
-    );
+    logger.info(t("socket.disconnected.ip", { ip: socket.handshake.address }));
     return;
   }
 
@@ -64,5 +62,5 @@ export function disconnect(socket: Socket) {
   client.connected = false;
   delete client.socketId;
 
-  logger.info(t("socket.connections.disconnected.id", { id: clientId }));
+  logger.info(t("socket.disconnected.id", { id: clientId }));
 }

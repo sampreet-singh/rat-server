@@ -10,9 +10,7 @@ const io = new Server({
 });
 
 io.on("connection", (socket) => {
-  logger.info(
-    t("socket.connections.connected.ip", { ip: socket.handshake.address }),
-  );
+  logger.info(t("socket.connected.ip", { ip: socket.handshake.address }));
 
   socket.on("identify", ({ clientId }) => identity(clientId, socket));
 

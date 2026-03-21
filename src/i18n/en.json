@@ -2,18 +2,15 @@
   "socket": {
     "started": "Socket server running on port {port}",
 
-    "connections": {
-      "connected": {
-        "id": "Client reconnected: ID {id}",
-        "ip": "Client connected: IP {ip}"
-      },
+    "identified": "Client identified: ID {id}",
 
-      "identified": "Client identified: ID {id}",
-
-      "disconnected": {
-        "id": "Client disconnected: ID {id}",
-        "ip": "Client disconnected: IP {ip}"
-      }
+    "connected": {
+      "id": "Client reconnected: ID {id}",
+      "ip": "Client connected: IP {ip}"
+    },
+    "disconnected": {
+      "id": "Client disconnected: ID {id}",
+      "ip": "Client disconnected: IP {ip}"
     }
   },
 
